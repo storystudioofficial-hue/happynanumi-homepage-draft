@@ -277,6 +277,15 @@
   .map-frame iframe{display:block;width:100%;height:100%;border:0}
   .map-links{display:grid;gap:10px}
   .map-links .btn{justify-content:center}
+  /* v13 */
+  .bloglink{color:var(--green);font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+  .bloglink:hover{text-decoration-thickness:3px}
+  .src{display:inline-flex;align-items:center;gap:3px;margin-left:8px;padding:1px 8px;border:1px solid var(--green);border-radius:999px;color:var(--green);font-size:.8125rem;font-weight:600;text-decoration:none;vertical-align:2px;white-space:nowrap}
+  .ext{width:.875rem;height:.875rem}
+  .reads a{padding:16px 16px 18px;border-bottom:1px solid var(--line)}
+  .reads a:hover{background:#EEF2EA}
+  .reads a b{color:var(--green);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+  .reads a .src{margin:10px 0 0}
 </style>
 </head>
 <body>
@@ -284,6 +293,7 @@
   <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
   <symbol id="i-msg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4"/></symbol>
@@ -342,12 +352,6 @@
         </figure>
       </div>
     </div>
-    <dl class="facts" aria-label="기관 정보">
-      <div><dt><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>기관</dt><dd>방문요양, 바우처 제공기관</dd></div>
-      <div><dt><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>개원</dt><dd>2026년 1월</dd></div>
-      <div><dt><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg>센터장 경력</dt><dd>노인복지 바우처 사업 10년</dd></div>
-      <div><dt><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>방문 기록</dt><dd>법정 급여제공기록지 제공</dd></div>
-    </dl>
   </div>
 </section>
 
@@ -454,7 +458,7 @@
       <span class="mark">선생님이 맞지 않을 때</span>
       <div>
         <p>선생님께 직접 말씀하지 않으셔도 됩니다. 센터로 연락 주세요.</p>
-        <p style="margin:0"><a class="textlink" href="https://blog.naver.com/happy-nanumi" target="_blank" rel="noopener">요양보호사 교체, 직접 말하지 않으셔도 됩니다 (블로그) →</a></p>
+        <p style="margin:0"><a class="bloglink" href="https://blog.naver.com/happy-nanumi" target="_blank" rel="noopener">요양보호사 교체, 직접 말하지 않으셔도 됩니다</a><span class="src">네이버 블로그<svg class="ico ext" aria-hidden="true"><use href="#i-ext"/></svg></span></p>
       </div>
     </div>
   </div>
@@ -474,7 +478,7 @@
     <div class="letter-foot">
       <span class="chip">노인복지 바우처 사업 10년</span>
       <span class="chip">2026년 1월 개원</span>
-      <a class="chip" style="text-decoration:none;color:var(--green)" href="https://blog.naver.com/happy-nanumi/224139362255" target="_blank" rel="noopener">센터를 연 이야기 읽기 →</a>
+      <span><a class="bloglink" href="https://blog.naver.com/happy-nanumi/224139362255" target="_blank" rel="noopener">센터를 연 이야기 읽기</a><span class="src">네이버 블로그<svg class="ico ext" aria-hidden="true"><use href="#i-ext"/></svg></span></span>
     </div>
   </div>
 </section>
@@ -560,9 +564,8 @@
       <div class="map-col">
         <div class="map-frame"><iframe src="https://maps.google.com/maps?q=%EA%B4%91%EC%A3%BC%20%EA%B4%91%EC%82%B0%EA%B5%AC%20%EC%8B%A0%EC%B0%BD%EB%8F%99%201125-3&z=17&output=embed" title="행복나누미케어센터 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
         <div class="map-links">
-          <a class="btn btn-primary" href="https://m.place.naver.com/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>네이버 플레이스에서 보기</a>
-          <a class="btn btn-ghost" href="https://map.naver.com/p/entry/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>네이버 지도로 길찾기</a>
-          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=%EA%B4%91%EC%A3%BC%20%EA%B4%91%EC%82%B0%EA%B5%AC%20%EC%8B%A0%EC%B0%BD%EB%8F%99%201125-3" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>Google 지도로 보기</a>
+          <a class="btn btn-primary" href="https://map.naver.com/p/entry/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>네이버 지도</a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=%EA%B4%91%EC%A3%BC%20%EA%B4%91%EC%82%B0%EA%B5%AC%20%EC%8B%A0%EC%B0%BD%EB%8F%99%201125-3" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>Google 지도</a>
         </div>
       </div>
     </div>
@@ -577,9 +580,9 @@
 
     <h3 class="serif" style="margin:64px 0 0;font-size:1.375rem">더 읽어 보실 글</h3>
     <div class="reads">
-      <a href="https://blog.naver.com/happy-nanumi/224324573699" target="_blank" rel="noopener"><b>전화 한 통이 망설여진다면</b><span>등급 없어도 괜찮습니다</span></a>
-      <a href="https://blog.naver.com/happy-nanumi/224400613565" target="_blank" rel="noopener"><b>상담, 사과부터 하지 않으셔도 됩니다</b><span>내 사정이 유난인가 싶을 때</span></a>
-      <a href="https://blog.naver.com/happy-nanumi/224139362255" target="_blank" rel="noopener"><b>센터를 연 사람</b><span>다시 같은 일을 합니다</span></a>
+      <a href="https://blog.naver.com/happy-nanumi/224324573699" target="_blank" rel="noopener"><b>전화 한 통이 망설여진다면</b><span>등급 없어도 괜찮습니다</span><br><span class="src">네이버 블로그<svg class="ico ext" aria-hidden="true"><use href="#i-ext"/></svg></span></a>
+      <a href="https://blog.naver.com/happy-nanumi/224400613565" target="_blank" rel="noopener"><b>상담, 사과부터 하지 않으셔도 됩니다</b><span>내 사정이 유난인가 싶을 때</span><br><span class="src">네이버 블로그<svg class="ico ext" aria-hidden="true"><use href="#i-ext"/></svg></span></a>
+      <a href="https://blog.naver.com/happy-nanumi/224139362255" target="_blank" rel="noopener"><b>센터를 연 사람</b><span>다시 같은 일을 합니다</span><br><span class="src">네이버 블로그<svg class="ico ext" aria-hidden="true"><use href="#i-ext"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -596,7 +599,7 @@
 <div class="mbar">
   <a class="btn btn-primary btn-sm" href="tel:0624191754"><svg class="ico"><use href="#i-phone"/></svg>전화</a>
   <a class="btn btn-ghost btn-sm" href="sms:01098842040"><svg class="ico"><use href="#i-msg"/></svg>문자</a>
-  <a class="btn btn-ghost btn-sm" href="https://m.place.naver.com/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>길찾기</a>
+  <a class="btn btn-ghost btn-sm" href="https://map.naver.com/p/entry/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>길찾기</a>
 </div>
 <script>
 (function(){
