@@ -44,8 +44,6 @@
   .skip:focus{top:10px}
   .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
   .ico{width:1.1em;height:1.1em;flex:none;vertical-align:-.15em}
-  .review-bar{background:#2F5BD3;color:#fff;font-size:.875rem;line-height:1.5;padding:8px 16px;text-align:center}
-  .review-bar b{color:#FFE7A8}
   .ask{display:inline-flex;align-items:center;gap:6px;background:var(--ask-bg);color:var(--ask);border:1.5px dashed var(--ask);border-radius:8px;padding:3px 10px;font-size:.875rem;font-weight:600;line-height:1.45;font-family:var(--sans)}
   .ask::before{content:"센터 확인";background:var(--ask);color:#fff;border-radius:4px;padding:0 6px;font-size:.75rem;flex:none}
   .ask-block{display:flex;padding:12px 14px}
@@ -274,6 +272,11 @@
 
   /* v11 */
   .ai-cap{display:block;margin-top:6px;font-size:.8125rem;color:#8A958C}
+  .map-col{display:grid;gap:14px}
+  .map-frame{width:100%;aspect-ratio:4/3;border:1px solid var(--line);background:#ECEFE7}
+  .map-frame iframe{display:block;width:100%;height:100%;border:0}
+  .map-links{display:grid;gap:10px}
+  .map-links .btn{justify-content:center}
 </style>
 </head>
 <body>
@@ -291,7 +294,6 @@
   <symbol id="i-pen" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M4 20l1-4L16 5l3 3L8 19zM13.5 7.5l3 3"/></symbol>
 </svg>
 
-<div class="review-bar">검토용 시안입니다 · <b>파란 점선</b>은 센터에서 확인해 주실 내용, <b>빗금 상자</b>는 앞으로 촬영할 사진 자리입니다</div>
 
 <a class="skip" href="#main">본문 바로가기</a>
 <header>
@@ -332,17 +334,16 @@
           <a class="btn btn-primary" href="tel:0624191754"><svg class="ico"><use href="#i-phone"/></svg>전화 상담 062-419-1754</a>
           <a class="btn btn-ghost" href="sms:01098842040"><svg class="ico"><use href="#i-msg"/></svg>문자 남기기</a>
         </div>
-        <p class="small"><span class="ask">상담 시간</span></p>
       </div>
       <div class="photo-col">
         <figure class="photo" style="margin:0">
-          <img src="hn-director.jpg" alt="센터장이 상담 테이블에서 이야기를 나누는 모습">
-          <figcaption><span>상담 테이블의 센터장</span><span class="ask">정면 사진 재촬영</span></figcaption>
+          <img src="hn-hero-visit.jpg" alt="어르신 댁 식탁에서 원목 교구에 말뚝을 꽂으며 함께 활동하는 두 사람의 손">
+          <figcaption><span>어르신 댁에서 함께한 교구 인지활동</span></figcaption>
         </figure>
       </div>
     </div>
     <dl class="facts" aria-label="기관 정보">
-      <div><dt><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>기관</dt><dd>방문요양, 바우처 제공기관<span class="ask">장기요양기관 지정명 표기</span></dd></div>
+      <div><dt><svg class="ico" aria-hidden="true"><use href="#i-home"/></svg>기관</dt><dd>방문요양, 바우처 제공기관</dd></div>
       <div><dt><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>개원</dt><dd>2026년 1월</dd></div>
       <div><dt><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg>센터장 경력</dt><dd>노인복지 바우처 사업 10년</dd></div>
       <div><dt><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg>방문 기록</dt><dd>법정 급여제공기록지 제공</dd></div>
@@ -390,15 +391,15 @@
     <div class="main-col">
     <div class="three">
       <div class="item">
-        <img src="hn-plan-cognitive.jpg" loading="lazy" alt="원목 교구에 말뚝을 꽂는 어르신의 손과 옆에서 말뚝을 모아 주는 요양보호사의 손. AI로 만든 예시 이미지"><span class="ai-cap">AI로 만든 예시 이미지</span>
+        <img src="hn-plan-cognitive.jpg" loading="lazy" alt="원목 교구에 말뚝을 꽂는 어르신의 손과 옆에서 말뚝을 모아 주는 요양보호사의 손">
         <div class="body"><h3>교구 인지활동 · 약 20분</h3><p>어르신의 상태에 맞춰 다양한 교구를 활용한 인지활동을 함께합니다.</p></div>
       </div>
       <div class="item">
-        <img src="hn-plan-meal.jpg" loading="lazy" alt="식탁 위 식단 계획표를 펜으로 짚는 손과 밥, 반찬 세 가지. AI로 만든 예시 이미지"><span class="ai-cap">AI로 만든 예시 이미지</span>
+        <img src="hn-plan-meal.jpg" loading="lazy" alt="식탁 위 식단 계획표를 펜으로 짚는 손과 밥, 반찬 세 가지">
         <div class="body"><h3>균형 잡힌 식단 계획표</h3><p>균형 잡힌 식생활을 이어가실 수 있도록 식단 계획표 제공과 실천을 돕습니다.</p></div>
       </div>
       <div class="item">
-        <img src="hn-plan-fall.jpg" loading="lazy" alt="문턱 앞 러그 가장자리를 바닥에 눌러 펴는 요양보호사의 손과 소파에 앉은 어르신의 발. AI로 만든 예시 이미지"><span class="ai-cap">AI로 만든 예시 이미지</span>
+        <img src="hn-plan-fall.jpg" loading="lazy" alt="문턱 앞 러그 가장자리를 바닥에 눌러 펴는 요양보호사의 손과 소파에 앉은 어르신의 발">
         <div class="body"><h3>생활 속 낙상예방</h3><p>어르신의 생활공간에서 낙상 위험 요소를 살피고 더 안전한 일상생활을 돕습니다.</p></div>
       </div>
     </div>
@@ -410,7 +411,6 @@
           <li>급여제공기록지는 모든 장기요양기관이 법에 따라 작성하고 제공하는 기록입니다.</li>
           <li>방문요양은 주 1회 이상, 전자 전송을 하는 경우 월 1회 이상 받으십니다.</li>
         </ul>
-        <span class="ask ask-block">보호자께서 기록지를 받으시는 방법 · 멀리 계신 가족께 따로 알려 드리는 방법(문자·카카오톡 등)</span>
       </div>
     </div>
   </div>
@@ -428,7 +428,7 @@
     <div class="docs">
       <div class="doc"><b><svg class="ico" aria-hidden="true"><use href="#i-doc"/></svg><span>계약서 한 부</span></b><span>계약서는 두 부를 만들어 한 부를 드립니다. 계약을 바꿀 때도 같습니다.</span></div>
       <div class="doc"><b><svg class="ico" aria-hidden="true"><use href="#i-list"/></svg><span>급여 내용과 비용</span></b><span>받으실 급여의 종류·내용·비용이 계약서에 들어갑니다.</span></div>
-      <div class="doc"><b><svg class="ico" aria-hidden="true"><use href="#i-receipt"/></svg><span>비급여 항목별 비용</span></b><span>급여가 아닌 항목이 있다면 항목별 비용을 계약서에 적습니다. <span class="ask">비급여 항목 유무</span></span></div>
+      <div class="doc"><b><svg class="ico" aria-hidden="true"><use href="#i-receipt"/></svg><span>비급여 항목별 비용</span></b><span>급여가 아닌 항목이 있다면 항목별 비용을 계약서에 적습니다.</span></div>
       <div class="doc"><b><svg class="ico" aria-hidden="true"><use href="#i-pen"/></svg><span>제공 계획과 비용 설명</span></b><span>계약할 때 설명드리고 동의서를 받습니다.</span></div>
     </div>
     <div id="honest" class="honest">
@@ -454,7 +454,6 @@
       <span class="mark">선생님이 맞지 않을 때</span>
       <div>
         <p>선생님께 직접 말씀하지 않으셔도 됩니다. 센터로 연락 주세요.</p>
-        <p><span class="ask">교체 요청을 받는 방법과 처리 순서</span></p>
         <p style="margin:0"><a class="textlink" href="https://blog.naver.com/happy-nanumi" target="_blank" rel="noopener">요양보호사 교체, 직접 말하지 않으셔도 됩니다 (블로그) →</a></p>
       </div>
     </div>
@@ -470,14 +469,13 @@
       <p>학원에서 30년 동안 학부모님들의 이야기를 들었고, 노인복지 바우처 사업을 10년 동안 했습니다. 그 10년 동안 배운 것은 사람마다 필요한 도움이 다르다는 것이었습니다.</p>
       <p>센터는 2026년 1월에 문을 열었습니다.</p>
       <p>장기요양등급이 아직 없으셔도, 무엇부터 해야 할지 정리가 안 되셨어도 연락 주세요. 지금 상황에 맞는 순서를 함께 짚어 드리겠습니다.</p>
-      <div class="sign"><span>행복나누미케어센터 센터장</span><span class="sig-box">손글씨 서명 · 실명</span></div>
+      <div class="sign"><span>행복나누미케어센터 센터장</span></div>
     </div>
     <div class="letter-foot">
       <span class="chip">노인복지 바우처 사업 10년</span>
       <span class="chip">2026년 1월 개원</span>
       <a class="chip" style="text-decoration:none;color:var(--green)" href="https://blog.naver.com/happy-nanumi/224139362255" target="_blank" rel="noopener">센터를 연 이야기 읽기 →</a>
     </div>
-    <div class="ph video-ph">센터장 인사 영상 30~60초 (촬영 예정)</div>
   </div>
 </section>
 
@@ -521,16 +519,16 @@
     </div>
     <div class="main-col">
     <details open><summary>장기요양등급이 없어도 상담할 수 있나요?</summary><p>네. 행복나누미케어센터는 등급이 나오기 전에도 상담합니다. 등급 신청 순서와 준비 서류부터 함께 짚어 드립니다.</p></details>
-    <details><summary>매일 가 볼 수 없는데, 어르신 상황은 어떻게 알 수 있나요?</summary><p>방문 때 한 일은 급여제공기록지에 남고, 방문요양은 주 1회 이상(전자 전송을 하는 경우 월 1회 이상) 받으십니다.</p><p><span class="ask">기록지 말고 따로 알려 드리는 방법</span></p></details>
+    <details><summary>매일 가 볼 수 없는데, 어르신 상황은 어떻게 알 수 있나요?</summary><p>방문 때 한 일은 급여제공기록지에 남고, 방문요양은 주 1회 이상(전자 전송을 하는 경우 월 1회 이상) 받으십니다.</p></details>
     <details><summary>방문요양과 주간보호는 무엇이 다른가요?</summary><p>방문요양은 요양보호사가 어르신 댁으로 방문해 신체활동과 가사활동 등을 돕는 급여입니다. 주·야간보호는 하루 중 일정 시간 어르신이 기관에 머무르며 신체활동 지원과 심신기능 유지를 위한 프로그램을 받는 급여입니다. 어느 쪽이 맞는지는 어르신 상태와 가족 일정에 따라 다릅니다.</p></details>
     <details><summary>혼자 사시는데, 등급 결과가 나오기 전에도 이용할 수 있나요?</summary><p>등급을 받으시는 경우, 함께 사는 가족이 없거나 함께 사는 가족이 미성년자 또는 65세 이상 어르신뿐이라면 신청서를 낸 날부터 장기요양급여를 받으실 수 있는 예외가 있습니다. 증명서류를 붙여 국민건강보험공단에 따로 신청하고, 공단이 확인해 결정합니다. 등급을 받지 못하시는 경우 그 기간의 비용은 공단에 먼저 확인해 주세요.</p></details>
     <details><summary>최근에 넘어지셔서 치료 중인데, 지금 등급을 신청해도 되나요?</summary><p>골절·수술 직후처럼 회복 중이시면 판정 결과가 달라질 수 있습니다. 등급은 「6개월 이상 혼자서 일상생활을 하기 어려운지」를 보고 판정하기 때문입니다. 신청 시기는 국민건강보험공단(1577-1000)에 먼저 문의해 주세요.</p></details>
-    <details><summary>방문요양 비용은 어떻게 정해지나요?</summary><p>급여비용은 보건복지부가 매년 고시하고, 본인부담률은 법령으로 정해져 있습니다. 재가급여 본인부담은 급여비용의 15%입니다. 국민기초생활보장법에 따른 의료급여 수급자는 부담이 없고, 법령이 정한 감경 대상(그 밖의 의료급여 수급권자, 보험료 기준 이하인 분 등)은 6% 또는 9%로 줄어듭니다. 등급별 월 한도액을 넘는 부분과 급여 범위 밖의 비용은 전액 본인부담이며, 밤 10시부터 오전 6시 사이, 일요일, 공휴일 방문은 급여비용이 가산됩니다.</p><p><span class="ask">비급여 항목이 있는지, 있다면 항목별 비용</span></p></details>
+    <details><summary>방문요양 비용은 어떻게 정해지나요?</summary><p>급여비용은 보건복지부가 매년 고시하고, 본인부담률은 법령으로 정해져 있습니다. 재가급여 본인부담은 급여비용의 15%입니다. 국민기초생활보장법에 따른 의료급여 수급자는 부담이 없고, 법령이 정한 감경 대상(그 밖의 의료급여 수급권자, 보험료 기준 이하인 분 등)은 6% 또는 9%로 줄어듭니다. 등급별 월 한도액을 넘는 부분과 급여 범위 밖의 비용은 전액 본인부담이며, 밤 10시부터 오전 6시 사이, 일요일, 공휴일 방문은 급여비용이 가산됩니다.</p></details>
     <details><summary>요양원(시설)은 몇 등급부터 이용할 수 있나요?</summary><p>장기요양 1·2등급은 재가급여와 시설급여 중에서 고를 수 있고, 3~5등급은 원칙적으로 재가급여를 이용합니다. 다만 3~5등급이라도 ① 주로 돌보는 가족이 수발하기 어렵거나 ② 주거환경이 열악해 입소가 불가피하거나 ③ 치매 등에 따른 문제행동으로 재가급여를 이용할 수 없어 등급판정위원회가 시설급여가 필요하다고 인정하면 시설급여를 이용할 수 있습니다. 인지지원등급은 주·야간보호, 단기보호, 종일 방문요양, 기타재가급여만 이용할 수 있습니다.</p></details>
     <details><summary>다니던 센터를 옮길 수 있나요?</summary><p>이용하실 기관은 계약으로 정해지므로, 다른 기관과 새로 계약하실 수 있습니다. 해지 시기와 절차는 지금 이용 중인 기관과 맺은 계약서의 계약기간과 내용을 먼저 확인해 보세요.</p></details>
     <details><summary>계약하러 갈 때 무엇을 챙기나요?</summary><p>장기요양인정서와 개인별장기요양이용계획서를 함께 가져오시면 됩니다.</p></details>
-    <details><summary>새로 연 센터인데, 평가 결과는 어디서 보나요?</summary><p>행복나누미케어센터는 2026년 1월에 문을 열었습니다. <span class="ask">평가 결과 없음 / 평가 전</span> 장기요양기관 평가 결과는 국민건강보험공단 노인장기요양보험 누리집의 「장기요양기관 찾기」에서 확인하실 수 있고, 계약 전에는 계약서와 방문 계획을 문서로 보고 정하실 수 있습니다.</p></details>
-    <details><summary>어느 지역까지 방문하나요?</summary><p>광주 광산구 신창동·수완동·운남동 인근을 중심으로 방문합니다.</p><p><span class="ask">전체 방문 권역</span></p></details>
+    <details><summary>새로 연 센터인데, 평가 결과는 어디서 보나요?</summary><p>행복나누미케어센터는 2026년 1월에 문을 열었습니다. 장기요양기관 평가 결과는 국민건강보험공단 노인장기요양보험 누리집의 「장기요양기관 찾기」에서 확인하실 수 있고, 계약 전에는 계약서와 방문 계획을 문서로 보고 정하실 수 있습니다.</p></details>
+    <details><summary>어느 지역까지 방문하나요?</summary><p>광주 광산구 신창동·수완동·운남동 인근을 중심으로 방문합니다.</p></details>
   </div>
   </div>
 </section>
@@ -557,18 +555,15 @@
           <li><b>주소</b><span>전남광주통합특별시 광산구 신창동 1125-3, 4층</span></li>
           <li><b>전화</b><a href="tel:0624191754">062-419-1754</a></li>
           <li><b>문자</b><a href="sms:01098842040">010-9884-2040</a></li>
-          <li><b>상담 시간</b><span><span class="ask">요일 · 시간</span></span></li>
-          <li><b>다니는 동네</b><span class="towns"><span>신창동</span><span>수완동</span><span>운남동</span><span class="ask">전체 권역</span></span></li>
         </ul>
-        <div class="cta-row">
-          <a class="btn btn-ghost" href="https://m.place.naver.com/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>네이버 지도에서 길찾기</a>
-          <span class="btn btn-sm btn-off">카카오톡 (채널 주소 확인)</span>
-        </div>
-        <p style="font-size:.9375rem;color:var(--muted);margin-top:12px"><a href="https://www.google.com/maps/search/?api=1&query=%ED%96%89%EB%B3%B5%EB%82%98%EB%88%84%EB%AF%B8%EC%BC%80%EC%96%B4%EC%84%BC%ED%84%B0" target="_blank" rel="noopener">Google 지도에서 보기</a> · <span class="ask">주차 · 엘리베이터</span></p>
       </div>
-      <div style="display:grid;gap:14px">
-        <div class="ph" style="min-height:200px">행복나누미 간판이 보이는 건물 외관 (촬영 예정)</div>
-        <figure class="photo" style="margin:0"><img src="hn-room.jpg" alt="센터 내부" style="aspect-ratio:16/9;object-position:center"><figcaption><span>센터 내부</span></figcaption></figure>
+      <div class="map-col">
+        <div class="map-frame"><iframe src="https://maps.google.com/maps?q=%EA%B4%91%EC%A3%BC%20%EA%B4%91%EC%82%B0%EA%B5%AC%20%EC%8B%A0%EC%B0%BD%EB%8F%99%201125-3&z=17&output=embed" title="행복나누미케어센터 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <div class="map-links">
+          <a class="btn btn-primary" href="https://m.place.naver.com/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>네이버 플레이스에서 보기</a>
+          <a class="btn btn-ghost" href="https://map.naver.com/p/entry/place/2042496230" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>네이버 지도로 길찾기</a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=%EA%B4%91%EC%A3%BC%20%EA%B4%91%EC%82%B0%EA%B5%AC%20%EC%8B%A0%EC%B0%BD%EB%8F%99%201125-3" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>Google 지도로 보기</a>
+        </div>
       </div>
     </div>
 
@@ -593,8 +588,7 @@
 <footer>
   <div class="wrap">
     행복나누미케어센터 · 방문요양 · 바우처 제공기관<br>
-    전남광주통합특별시 광산구 신창동 1125-3, 4층 · 062-419-1754 · 문자 010-9884-2040<br>
-    <span class="ask">장기요양기관 지정명 표기</span> <span class="ask">사업자 정보</span> <span class="ask">개인정보 처리방침</span>
+    전남광주통합특별시 광산구 신창동 1125-3, 4층 · 062-419-1754 · 문자 010-9884-2040
     <span class="credit">이 페이지에는 네이버에서 제공한 마루 부리 글꼴이 적용되어 있습니다.</span>
   </div>
 </footer>
