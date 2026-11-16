@@ -1,0 +1,30 @@
+---
+import { SITE } from '../data/site';
+import { getPosts } from '../data/blog';
+interface Props { home?: boolean; current?: 'blog' }
+const { home = false, current } = Astro.props;
+// 홈에서는 같은 페이지 안의 장으로, 다른 페이지에서는 홈의 장으로 이동한다.
+const at = (id: string) => (home ? `#${id}` : `/#${id}`);
+// 공개된 글이 하나라도 있을 때만 '블로그' 메뉴를 보인다. 그 전까지 홈 화면은 v20과 같다.
+const showBlog = (await getPosts()).length > 0;
+---
+<header>
+  <div class="wrap">
+    <a class="brand" href={home ? '#' : '/'}><img src="/hn-mark.png" alt="">{SITE.name}</a>
+    <nav aria-label="안내서 차례">
+      <a href={at('plan')}>방문 계획</a>
+      <a href={at('first')}>첫 상담</a>
+      <a href={at('faq')}>자주 묻는 질문</a>
+      <a href={at('visit')}>연락처·위치</a>
+      {showBlog && <a href="/blog/" aria-current={current === 'blog' ? 'page' : undefined}>블로그</a>}
+    </nav>
+    <div class="head-tools">
+      <div class="size" role="group" aria-label="글자 크기">
+        <span>글자 크기</span>
+        <button type="button" data-size="base" aria-pressed="true">보통</button>
+        <button type="button" data-size="large" aria-pressed="false">크게</button>
+      </div>
+      <a class="btn btn-primary btn-sm head-tel" href={SITE.telHref}><svg class="ico"><use href="#i-phone"/></svg>{SITE.tel}</a>
+    </div>
+  </div>
+</header>

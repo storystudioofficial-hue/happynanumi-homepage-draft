@@ -1,0 +1,92 @@
+/* 블로그 전용 스타일. 색·버튼·머리말·바닥글은 global.css를 그대로 쓴다. */
+
+/* 홈의 마루부리는 홈에 쓰인 글자만 남긴 파일이라, 블로그 제목은 네이버 배포 전체 글꼴을 쓴다. */
+@font-face{font-family:"MaruBuriFull";font-weight:700;font-style:normal;font-display:swap;src:url("https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2") format("woff2")}
+.blog-page{--serif:"MaruBuriFull","MaruBuri","Noto Serif KR",AppleMyungjo,serif}
+
+.blog-wrap{max-width:780px;margin:0 auto;padding:0 28px}
+/* global.css의 nav 규칙(가로 배치, 좁은 화면에서 숨김)은 머리말 메뉴용이라 본문 nav에는 풀어 준다. */
+nav.crumbs,nav.more{display:block;gap:0}
+.crumbs{font-size:.9375rem;color:var(--muted);padding:28px 0 0}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{color:var(--green);text-decoration:underline}
+.crumbs span{margin:0 8px;color:var(--muted)}
+
+/* 목록 */
+.blog-head{padding:40px 0 32px}
+.blog-head h1{font-size:2.5rem;margin:0 0 12px}
+.post-list{list-style:none;margin:0 0 96px;padding:0;border-top:2px solid var(--rule)}
+.post-list li{border-bottom:1px solid var(--line)}
+.post-list a{display:block;padding:22px 0;text-decoration:none}
+.post-list a:hover b{color:var(--green);text-decoration:underline;text-underline-offset:4px}
+.post-list b{display:block;font-family:var(--serif);font-size:1.3125rem;line-height:1.45;margin-bottom:6px;color:var(--heading)}
+.post-list p{margin:0 0 6px;color:var(--muted);font-size:1rem}
+.post-list time{font-size:.875rem;color:var(--muted)}
+.empty{color:var(--muted);padding:32px 0 96px}
+.draft-tag{display:inline-block;margin-left:8px;padding:0 8px;border:1.5px dashed var(--note);border-radius:6px;color:var(--note);background:var(--note-bg);font-family:var(--sans);font-size:.75rem;font-weight:700;vertical-align:3px}
+
+/* 글 머리 */
+.post-head{padding:32px 0 28px;border-bottom:2px solid var(--rule)}
+.post-head .kicker{margin:0 0 14px}
+.post-head h1{font-size:2.375rem;line-height:1.38;margin:0 0 16px}
+.post-desc{font-size:1.125rem;color:var(--muted);margin:0 0 20px}
+.post-meta{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0;font-size:.9375rem;color:var(--muted)}
+.post-meta div{display:flex;gap:6px}
+.post-meta dt{font-weight:600}
+.post-meta dd{margin:0}
+
+/* 본문 */
+.prose{padding:36px 0 8px;font-size:1.125rem;line-height:1.9}
+.prose > :first-child{margin-top:0}
+.prose p{margin:0 0 1.15em}
+.prose h2{font-size:1.625rem;line-height:1.45;margin:2.2em 0 .7em;padding-top:16px;border-top:2px solid var(--green)}
+.prose h3{font-family:var(--serif);font-size:1.25rem;margin:1.8em 0 .5em;color:var(--heading)}
+.prose a{color:var(--green);font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.prose ul,.prose ol{margin:0 0 1.2em;padding-left:1.4em}
+.prose li{margin-bottom:.45em}
+.prose li::marker{color:var(--green)}
+.prose strong{color:var(--ink)}
+.prose blockquote{margin:1.6em 0;padding:16px 22px;background:var(--band);border-left:4px solid var(--green);color:var(--ink)}
+.prose blockquote p:last-child{margin:0}
+.prose hr{border:0;border-top:1px solid var(--line);margin:2.4em 0}
+.prose img{display:block;height:auto;margin:1.6em 0}
+.prose table{width:100%;border-collapse:collapse;margin:1.6em 0;border-top:2px solid var(--rule);font-size:1rem;line-height:1.6}
+.prose th,.prose td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-bottom:1px solid var(--line)}
+.prose th{font-family:var(--serif);color:var(--heading)}
+
+/* 근거 출처 */
+.sources{margin:40px 0 0;padding:20px 24px;background:var(--card);border:1px solid var(--line)}
+.sources h2{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--muted);margin:0 0 10px;letter-spacing:0}
+.sources ul{margin:0;padding-left:1.2em;font-size:.9375rem}
+.sources a{color:var(--green);word-break:break-all}
+
+/* 상담 안내 */
+.post-cta{margin:48px 0 0;padding:36px 32px;background:var(--green);color:#F4F6F1;text-align:center}
+.post-cta .big{font-family:var(--serif);font-size:1.375rem;line-height:1.55;margin:0 0 20px;font-weight:700}
+.post-cta .cta-row{justify-content:center}
+.post-cta .btn-primary{background:#F4F6F1;color:var(--green);border-color:#F4F6F1}
+.post-cta .btn-primary:hover{background:#fff}
+.post-cta .btn-ghost{color:#F4F6F1;border-color:#9DBFAE}
+.post-cta .btn-ghost:hover{background:var(--green-2)}
+.post-cta .small{color:#D5E5DB;font-size:.9375rem;margin:14px 0 0}
+
+/* 다른 글 */
+.more{margin:56px 0 96px}
+.more h2{font-size:1.25rem;margin:0 0 4px}
+.more .post-list{margin:0}
+
+@media (max-width:860px){
+  .blog-wrap{padding:0 20px}
+  .crumbs{padding-top:20px}
+  .blog-head h1{font-size:1.875rem}
+  .post-head h1{font-size:1.6875rem}
+  .post-desc{font-size:1.0625rem}
+  .prose{font-size:1.0625rem}
+  .prose h2{font-size:1.375rem}
+  .post-cta{padding:28px 20px;margin-left:-20px;margin-right:-20px}
+  .post-cta .big{font-size:1.1875rem}
+  .more{margin-bottom:60px}
+}
+
+/* 머리말의 '블로그' 메뉴 현재 위치 표시 (홈의 장 표시와 같은 모양) */
+nav a[aria-current="page"]{color:var(--ink);font-weight:700;border-bottom-color:var(--green)}

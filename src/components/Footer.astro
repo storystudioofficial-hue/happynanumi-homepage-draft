@@ -1,0 +1,18 @@
+---
+import { SITE } from '../data/site';
+---
+<footer>
+  <div class="wrap">
+    {SITE.name} · 방문요양 · 바우처 제공기관<br>
+    주소 {SITE.address} ({SITE.addressOld})<br>
+    전화 {SITE.tel} · 문자 {SITE.sms}<br>
+    <a class="foot-link" href="/privacy.html">개인정보 처리방침</a>
+    <span class="credit">이 페이지에는 네이버에서 제공한 마루 부리 글꼴이 적용되어 있습니다.</span>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn btn-primary btn-sm" href={SITE.telHref}><svg class="ico"><use href="#i-phone"/></svg>전화</a>
+  <a class="btn btn-ghost btn-sm" href={SITE.smsHref}><svg class="ico"><use href="#i-msg"/></svg>문자</a>
+  <a class="btn btn-ghost btn-sm" href={SITE.naverMap} target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg>길찾기</a>
+</div>
