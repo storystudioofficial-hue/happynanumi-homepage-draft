@@ -412,3 +412,12 @@
     .home-v21 ol.steps{grid-template-columns:1fr;gap:22px}
     .home-v21 .checklist{padding:18px 18px 6px}
   }
+
+  /* '저희 답' 칸: 한 줄 답을 먼저, 이동은 목적지 이름을 단 보조 링크로 (2026-11-23) */
+  .home-v21 .qa .row{grid-template-columns:minmax(0,.95fr) minmax(0,1fr) minmax(0,1.35fr)}
+  .home-v21 .qa .ans p{margin:0 0 8px;font-size:1rem;line-height:1.7;color:var(--muted)}
+  .home-v21 .qa .ans p b{color:var(--ink)}
+  .home-v21 .qa .ans a.more{display:inline-flex;align-items:center;gap:4px;font-size:.9375rem;font-weight:600;color:var(--green);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+  .home-v21 .qa .ans a.more:hover{border-bottom-color:var(--green)}
+  @media (max-width:860px){.home-v21 .qa .row{grid-template-columns:1fr}}
+  .home-v21 .qa .row:last-child{border-bottom:0}
