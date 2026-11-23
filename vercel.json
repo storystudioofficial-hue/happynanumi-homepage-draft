@@ -6,11 +6,42 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "happynanumi-homepage\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://happy-nanumi.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+/",
+      "has": [
+        {
+          "type": "host",
+          "value": "happynanumi-homepage\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://happy-nanumi.com/:path+/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "happynanumi-homepage\\.vercel\\.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "happynanumi-homepage\\.vercel\\.app"
+        }
+      ],
       "destination": "https://happy-nanumi.com/:path*",
       "permanent": true
     },
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
