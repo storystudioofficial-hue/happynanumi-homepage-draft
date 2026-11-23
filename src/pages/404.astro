@@ -1,0 +1,26 @@
+---
+// 없는 주소로 들어왔을 때 보이는 페이지. 검색 결과에는 넣지 않는다.
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+// 홈의 마루부리는 홈 글자만 담은 파일이라, 블로그처럼 전체 글꼴을 쓴다.
+import '../styles/blog.css';
+---
+<Base
+  title={`페이지를 찾을 수 없습니다 | ${SITE.name}`}
+  description="주소가 바뀌었거나 없는 페이지입니다. 행복나누미복지센터 첫 화면에서 다시 찾아 주세요."
+  path="/404/"
+  noindex
+  bodyClass="blog-page"
+>
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">{SITE.name}</p>
+    <h1>찾으시는 페이지가 없습니다</h1>
+    <p class="sub">주소가 바뀌었거나 없는 페이지입니다. 첫 화면에서 다시 찾으시거나, 전화로 물어봐 주세요.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/">첫 화면으로</a>
+      <a class="btn btn-ghost" href={SITE.telHref}><svg class="ico"><use href="#i-phone"/></svg>전화 상담 {SITE.tel}</a>
+    </div>
+  </div>
+</section>
+</Base>

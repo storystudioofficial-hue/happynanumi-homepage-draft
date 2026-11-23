@@ -51,7 +51,9 @@ const url = abs(path);
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {jsonLd.map((d) => <script type="application/ld+json" is:inline set:html={JSON.stringify(d)} />)}
 <link rel="preload" href="/fonts/maruburi-bold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<!-- Pretendard는 화면에 쓰인 글자 범위만 받는 분할판을 쓴다(전체판은 굵기마다 약 780KB). -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
 <slot name="head" />
 </head>
 <body class={bodyClass}>

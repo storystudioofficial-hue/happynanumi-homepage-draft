@@ -3,5 +3,14 @@
   "framework": "astro",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "happynanumi-homepage\\.vercel\\.app" }],
+      "destination": "https://happy-nanumi.com/:path*",
+      "permanent": true
+    },
+    { "source": "/index.html", "destination": "/", "permanent": true }
+  ]
 }

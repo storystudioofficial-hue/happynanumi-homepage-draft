@@ -1,9 +1,21 @@
 [
   {
     "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://happy-nanumi.com/#website",
+    "name": "행복나누미복지센터",
+    "url": "https://happy-nanumi.com/",
+    "inLanguage": "ko-KR",
+    "publisher": {
+      "@id": "https://happy-nanumi.com/#business"
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": "https://happy-nanumi.com/#business",
     "name": "행복나누미복지센터",
+    "alternateName": "행복나누미케어센터",
     "description": "광주 광산구 방문요양 · 바우처 제공기관",
     "url": "https://happy-nanumi.com/",
     "telephone": "+82-62-419-1754",
@@ -30,6 +42,20 @@
     "sameAs": [
       "https://m.place.naver.com/place/2042496230",
       "https://blog.naver.com/happy-nanumi"
+    ],
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "방문요양",
+          "serviceType": "노인장기요양보험 재가급여(방문요양)",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "광주 광산구"
+          }
+        }
+      }
     ]
   },
   {

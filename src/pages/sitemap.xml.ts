@@ -4,7 +4,7 @@ import { abs } from '../data/site';
 import { CATEGORIES } from '../data/categories';
 
 // 서치 콘솔·서치어드바이저에 제출한 주소(/sitemap.xml)를 그대로 유지한다.
-const HOME_UPDATED = '2026-11-06'; // 홈 내용을 고치면 이 날짜도 바꾼다
+const HOME_UPDATED = '2026-11-23'; // 홈 내용을 고치면 이 날짜도 바꾼다
 const day = (d: Date) => d.toISOString().slice(0, 10);
 const last = (ds: Date[]) => ds.sort((a, b) => b.getTime() - a.getTime())[0];
 
