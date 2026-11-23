@@ -90,3 +90,55 @@ nav.crumbs,nav.more{display:block;gap:0}
 
 /* 머리말의 '블로그' 메뉴 현재 위치 표시 (홈의 장 표시와 같은 모양) */
 nav a[aria-current="page"]{color:var(--ink);font-weight:700;border-bottom-color:var(--green)}
+
+/* ── 블로그 기능 보강 (분류·목차·센터 소개) ── */
+nav.cat-nav,nav.toc{display:block;gap:0}
+.cat-tag{display:inline-block;margin:0 0 6px;padding:2px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-family:var(--sans);font-size:.8125rem;font-weight:700;line-height:1.6;text-decoration:none}
+a.cat-tag:hover{background:#d3e2d7}
+.post-head .kicker{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.post-head .kicker .cat-tag{margin:0}
+.post-head .kicker .draft-tag{margin:0}
+
+.cat-nav{display:flex !important;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.cat-nav a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:.9375rem;text-decoration:none;color:var(--muted);background:var(--card)}
+.cat-nav a span{font-size:.8125rem;color:var(--muted)}
+.cat-nav a:hover{border-color:var(--green);color:var(--green)}
+.cat-nav a[aria-current="page"]{background:var(--green);border-color:var(--green);color:#fff;font-weight:700}
+.cat-nav a[aria-current="page"] span{color:#D5E5DB}
+
+.toc{margin:28px 0 0;padding:20px 24px;background:var(--band);border-left:4px solid var(--green)}
+.toc-title{margin:0 0 8px;font-family:var(--serif);font-weight:700;color:var(--heading);font-size:1.0625rem}
+.toc ol{margin:0;padding-left:1.3em;font-size:1rem;line-height:1.7}
+.toc li{margin:3px 0}
+.toc li::marker{color:var(--green);font-weight:700}
+.toc li.sub{list-style:none;margin-left:.2em;font-size:.9375rem}
+.toc li.sub::before{content:"– ";color:var(--muted)}
+.toc a{text-decoration:none}
+.toc a:hover{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.prose h2,.prose h3{scroll-margin-top:96px}
+
+.center-box{display:flex;gap:18px;align-items:flex-start;margin:40px 0 0;padding:22px 24px;border-top:2px solid var(--rule);border-bottom:1px solid var(--line)}
+.center-box img{flex:none;width:56px;height:56px;object-fit:contain}
+.center-box p{margin:0}
+.center-name{font-family:var(--serif);font-weight:700;font-size:1.125rem;color:var(--heading)}
+.center-kind{font-size:.9375rem;color:var(--muted)}
+.center-chips{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px !important;font-size:.9375rem;font-weight:600}
+.center-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:8px !important;font-size:.9375rem}
+.center-links a{color:var(--green);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+@media (max-width:860px){
+  .toc{padding:16px 18px}
+  .center-box{padding:18px 0}
+}
+
+/* global.css의 header 규칙(상단 고정·밑줄)은 사이트 머리말용이라 글 제목 영역에서는 푼다. */
+header.blog-head,header.post-head{position:static;z-index:auto;background:none}
+header.blog-head{border-bottom:0}
+/* nav 규칙의 gap:0을 분류 버튼에서는 다시 띄운다. */
+nav.cat-nav{gap:8px}
+/* 목차 번호는 큰 소제목만 센다. */
+.toc ol{list-style:none;padding-left:0;counter-reset:toc}
+.toc li:not(.sub){counter-increment:toc;padding-left:1.6em;position:relative}
+.toc li:not(.sub)::before{content:counter(toc) ".";position:absolute;left:0;color:var(--green);font-weight:700}
+.toc li.sub{padding-left:1.6em}
+.toc li.sub::before{content:"– "}

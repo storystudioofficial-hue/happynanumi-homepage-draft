@@ -1,0 +1,23 @@
+---
+// 블로그 글 목록 한 묶음. 목록·분류·관련 글에서 같이 쓴다.
+import { fmtDate, isoDate, isScheduled, type Post } from '../../data/blog';
+import { categoryOf } from '../../data/categories';
+interface Props { posts: Post[]; showCategory?: boolean; showDate?: boolean }
+const { posts, showCategory = true, showDate = true } = Astro.props;
+---
+<ul class="post-list">
+  {posts.map((p) => (
+    <li>
+      <a href={`/blog/${p.id}/`}>
+        {showCategory && <span class="cat-tag">{categoryOf(p.data.category)?.label}</span>}
+        <b>
+          {p.data.title}
+          {p.data.draft && <span class="draft-tag">초안</span>}
+          {!p.data.draft && isScheduled(p) && <span class="draft-tag">예약</span>}
+        </b>
+        <p>{p.data.description}</p>
+        {showDate && <time datetime={isoDate(p.data.pubDate)}>{fmtDate(p.data.pubDate)}</time>}
+      </a>
+    </li>
+  ))}
+</ul>

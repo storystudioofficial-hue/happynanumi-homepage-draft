@@ -2,100 +2,146 @@
 import Base from '../../layouts/Base.astro';
 import '../../styles/blog.css';
 import { render } from 'astro:content';
-import { getPosts, fmtDate, isoDate, type Post } from '../../data/blog';
+import { getPosts, relatedPosts, fmtDate, isoDate, isScheduled, type Post } from '../../data/blog';
+import { categoryOf } from '../../data/categories';
 import { SITE, abs } from '../../data/site';
+import PostList from '../../components/blog/PostList.astro';
+import Toc from '../../components/blog/Toc.astro';
+import CenterBox from '../../components/blog/CenterBox.astro';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
+  const ids = new Set(posts.map((p) => p.id));
+  const pages = posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
+  // 예전 주소 → 새 글로 보내는 페이지 (지금 쓰는 글 주소와 겹치면 만들지 않는다)
+  const moved = posts.flatMap((post) =>
+    post.data.redirectFrom
+      .map((old) => old.replace(/^\/?(blog\/)?|\/$/g, ''))
+      .filter((old) => old && !ids.has(old))
+      .map((old) => ({ params: { slug: old }, props: { redirectTo: `/blog/${post.id}/` } })),
+  );
+  return [...pages, ...moved];
 }
 
-const { post, posts } = Astro.props as { post: Post; posts: Post[] };
-const { data } = post;
-const { Content } = await render(post);
-const path = `/blog/${post.id}/`;
-const modified = data.updatedDate ?? data.pubDate;
-const others = posts.filter((p) => p.id !== post.id).slice(0, 3);
+type Props = { post: Post; posts: Post[]; redirectTo?: undefined } | { redirectTo: string; post?: undefined; posts?: undefined };
+const props = Astro.props as Props;
 
-const jsonLd = [
-  {
-    '@context': 'https://schema.org', '@type': 'BlogPosting',
-    headline: data.title, description: data.description,
-    datePublished: isoDate(data.pubDate), dateModified: isoDate(modified),
-    inLanguage: 'ko-KR', image: SITE.ogImage,
-    mainEntityOfPage: abs(path),
-    author: { '@type': 'Organization', '@id': abs('/#business'), name: SITE.name, url: abs('/') },
-    publisher: { '@id': abs('/#business') },
-    isPartOf: { '@id': abs('/blog/#blog') },
-    ...(data.sources.length ? { citation: data.sources.map((s) => s.url) } : {}),
-  },
-  {
-    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: '홈', item: abs('/') },
-      { '@type': 'ListItem', position: 2, name: '블로그', item: abs('/blog/') },
-      { '@type': 'ListItem', position: 3, name: data.title, item: abs(path) },
-    ],
-  },
-];
+let view: null | {
+  post: Post; Content: any; headings: any[]; path: string; modified: Date;
+  related: Post[]; jsonLd: object[]; category: ReturnType<typeof categoryOf>;
+} = null;
+
+if (!props.redirectTo) {
+  const { post, posts } = props;
+  const { data } = post;
+  const { Content, headings } = await render(post);
+  const path = `/blog/${post.id}/`;
+  const modified = data.updatedDate ?? data.pubDate;
+  const category = categoryOf(data.category);
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org', '@type': 'BlogPosting',
+      headline: data.title, description: data.description,
+      datePublished: isoDate(data.pubDate), dateModified: isoDate(modified),
+      inLanguage: 'ko-KR', image: data.ogImage ? abs(data.ogImage) : SITE.ogImage,
+      mainEntityOfPage: abs(path),
+      ...(category ? { articleSection: category.label } : {}),
+      author: { '@type': 'Organization', '@id': abs('/#business'), name: SITE.name, url: abs('/') },
+      publisher: { '@id': abs('/#business') },
+      isPartOf: { '@id': abs('/blog/#blog') },
+      ...(data.sources.length ? { citation: data.sources.map((s) => s.url) } : {}),
+    },
+    {
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: '홈', item: abs('/') },
+        { '@type': 'ListItem', position: 2, name: '블로그', item: abs('/blog/') },
+        ...(category ? [{ '@type': 'ListItem', position: 3, name: category.label, item: abs(`/blog/category/${category.slug}/`) }] : []),
+        { '@type': 'ListItem', position: category ? 4 : 3, name: data.title, item: abs(path) },
+      ],
+    },
+  ];
+  view = { post, Content, headings, path, modified, related: relatedPosts(post, posts), jsonLd, category };
+}
 ---
-<Base
-  title={`${data.title} | ${SITE.name}`}
-  description={data.description}
-  path={path}
-  ogTitle={data.title}
-  ogType="article"
-  jsonLd={jsonLd}
-  current="blog"
-  bodyClass="blog-page"
-  noindex={data.draft}
->
-  <Fragment slot="head">
-    <meta property="article:published_time" content={isoDate(data.pubDate)}>
-    <meta property="article:modified_time" content={isoDate(modified)}>
-  </Fragment>
-  <article class="blog-wrap">
-    <nav class="crumbs" aria-label="현재 위치"><a href="/">홈</a><span>›</span><a href="/blog/">블로그</a></nav>
-    <header class="post-head">
-      <p class="kicker">{SITE.name} 블로그{data.draft && <span class="draft-tag">초안 · 공개 안 됨</span>}</p>
-      <h1>{data.title}</h1>
-      <p class="post-desc">{data.description}</p>
-      <dl class="post-meta">
-        <div><dt>게시</dt><dd><time datetime={isoDate(data.pubDate)}>{fmtDate(data.pubDate)}</time></dd></div>
-        {data.updatedDate && <div><dt>고친 날</dt><dd><time datetime={isoDate(data.updatedDate)}>{fmtDate(data.updatedDate)}</time></dd></div>}
-        {data.reviewedDate && <div><dt>제도 확인</dt><dd>{fmtDate(data.reviewedDate)} 기준</dd></div>}
-        <div><dt>작성</dt><dd>{SITE.name}</dd></div>
-      </dl>
-    </header>
-
-    <div class="prose"><Content /></div>
-
-    {data.sources.length > 0 && (
-      <section class="sources" aria-labelledby="src-title">
-        <h2 id="src-title">근거로 확인한 자료</h2>
-        <ul>{data.sources.map((s) => <li><a href={s.url} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
-      </section>
-    )}
-
-    <aside class="post-cta" aria-label="상담 안내">
-      <p class="big">지금 상황에서 무엇부터 할지 함께 짚어 드립니다.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href={SITE.telHref}><svg class="ico"><use href="#i-phone"/></svg>전화 상담 {SITE.tel}</a>
-        <a class="btn btn-ghost" href={SITE.smsHref}><svg class="ico"><use href="#i-msg"/></svg>문자 남기기</a>
-      </div>
-      <p class="small">문자에는 성함과 연락 가능한 시간만 남겨 주세요. 어르신 상황은 통화로 여쭙겠습니다.</p>
-    </aside>
-
-    {others.length > 0 && (
-      <nav class="more" aria-labelledby="more-title">
-        <h2 id="more-title">다른 글</h2>
-        <ul class="post-list">
-          {others.map((p) => (
-            <li><a href={`/blog/${p.id}/`}><b>{p.data.title}</b><p>{p.data.description}</p></a></li>
-          ))}
-        </ul>
+{props.redirectTo ? (
+  <html lang="ko">
+    <head>
+      <meta charset="utf-8">
+      <title>글 주소가 바뀌었습니다</title>
+      <meta name="robots" content="noindex">
+      <link rel="canonical" href={abs(props.redirectTo)}>
+      <meta http-equiv="refresh" content={`0; url=${props.redirectTo}`}>
+    </head>
+    <body><p>글 주소가 바뀌었습니다. <a href={props.redirectTo}>새 주소로 이동</a></p></body>
+  </html>
+) : view && (
+  <Base
+    title={view.post.data.seoTitle ?? `${view.post.data.title} | ${SITE.name}`}
+    description={view.post.data.description}
+    path={view.path}
+    ogTitle={view.post.data.title}
+    ogType="article"
+    ogImage={view.post.data.ogImage ? abs(view.post.data.ogImage) : undefined}
+    jsonLd={view.jsonLd}
+    current="blog"
+    bodyClass="blog-page"
+    noindex={view.post.data.draft || view.post.data.noindex}
+  >
+    <Fragment slot="head">
+      <meta property="article:published_time" content={isoDate(view.post.data.pubDate)}>
+      <meta property="article:modified_time" content={isoDate(view.modified)}>
+      {view.category && <meta property="article:section" content={view.category.label}>}
+    </Fragment>
+    <article class="blog-wrap">
+      <nav class="crumbs" aria-label="현재 위치">
+        <a href="/">홈</a><span>›</span><a href="/blog/">블로그</a>
+        {view.category && <><span>›</span><a href={`/blog/category/${view.category.slug}/`}>{view.category.label}</a></>}
       </nav>
-    )}
-    {others.length === 0 && <div style="height:96px"></div>}
-  </article>
-</Base>
+      <header class="post-head">
+        <p class="kicker">
+          {view.category ? <a class="cat-tag" href={`/blog/category/${view.category.slug}/`}>{view.category.label}</a> : `${SITE.name} 블로그`}
+          {view.post.data.draft && <span class="draft-tag">초안 · 공개 안 됨</span>}
+          {!view.post.data.draft && isScheduled(view.post) && <span class="draft-tag">예약 · {fmtDate(view.post.data.pubDate)} 공개</span>}
+        </p>
+        <h1>{view.post.data.title}</h1>
+        <p class="post-desc">{view.post.data.description}</p>
+        <dl class="post-meta">
+          <div><dt>게시</dt><dd><time datetime={isoDate(view.post.data.pubDate)}>{fmtDate(view.post.data.pubDate)}</time></dd></div>
+          {view.post.data.updatedDate && <div><dt>고친 날</dt><dd><time datetime={isoDate(view.post.data.updatedDate)}>{fmtDate(view.post.data.updatedDate)}</time></dd></div>}
+          {view.post.data.reviewedDate && <div><dt>제도 확인</dt><dd>{fmtDate(view.post.data.reviewedDate)} 기준</dd></div>}
+          <div><dt>작성</dt><dd>{SITE.name}</dd></div>
+        </dl>
+      </header>
+
+      {view.post.data.toc && <Toc headings={view.headings} />}
+
+      <div class="prose"><view.Content /></div>
+
+      {view.post.data.sources.length > 0 && (
+        <section class="sources" aria-labelledby="src-title">
+          <h2 id="src-title">근거로 확인한 자료</h2>
+          <ul>{view.post.data.sources.map((s) => <li><a href={s.url} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
+        </section>
+      )}
+
+      <CenterBox />
+
+      <aside class="post-cta" aria-label="상담 안내">
+        <p class="big">지금 상황에서 무엇부터 할지 함께 짚어 드립니다.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href={SITE.telHref}><svg class="ico"><use href="#i-phone"/></svg>전화 상담 {SITE.tel}</a>
+          <a class="btn btn-ghost" href={SITE.smsHref}><svg class="ico"><use href="#i-msg"/></svg>문자 남기기</a>
+        </div>
+        <p class="small">문자에는 성함과 연락 가능한 시간만 남겨 주세요. 어르신 상황은 통화로 여쭙겠습니다.</p>
+      </aside>
+
+      {view.related.length > 0 ? (
+        <nav class="more" aria-labelledby="more-title">
+          <h2 id="more-title">함께 읽으면 좋은 글</h2>
+          <PostList posts={view.related} showDate={false} />
+        </nav>
+      ) : <div style="height:96px"></div>}
+    </article>
+  </Base>
+)}

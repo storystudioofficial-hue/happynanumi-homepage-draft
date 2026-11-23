@@ -1,12 +1,15 @@
 ---
 import { SITE } from '../data/site';
+import { getPosts } from '../data/blog';
+// 휴대폰에서는 머리말 메뉴가 숨겨지므로, 공개 글이 있으면 바닥글에도 블로그 링크를 둔다.
+const showBlog = (await getPosts()).length > 0;
 ---
 <footer>
   <div class="wrap">
     {SITE.name} · 방문요양 · 바우처 제공기관<br>
     주소 {SITE.address} ({SITE.addressOld})<br>
     전화 {SITE.tel} · 문자 {SITE.sms}<br>
-    <a class="foot-link" href="/privacy.html">개인정보 처리방침</a>
+    {showBlog && <><a class="foot-link" href="/blog/">블로그</a> · </>}<a class="foot-link" href="/privacy.html">개인정보 처리방침</a>
     <span class="credit">이 페이지에는 네이버에서 제공한 마루 부리 글꼴이 적용되어 있습니다.</span>
   </div>
 </footer>

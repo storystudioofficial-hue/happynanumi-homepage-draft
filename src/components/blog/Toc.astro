@@ -1,0 +1,17 @@
+---
+// 글 목차. 큰 소제목(##)이 3개 이상일 때만 보인다. 작은 소제목(###)은 들여 쓴다.
+import type { MarkdownHeading } from 'astro';
+interface Props { headings: MarkdownHeading[] }
+const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3);
+const show = items.filter((h) => h.depth === 2).length >= 3;
+---
+{show && (
+  <nav class="toc" aria-labelledby="toc-title">
+    <p id="toc-title" class="toc-title">이 글의 순서</p>
+    <ol>
+      {items.map((h) => (
+        <li class={h.depth === 3 ? 'sub' : undefined}><a href={`#${h.slug}`}>{h.text}</a></li>
+      ))}
+    </ol>
+  </nav>
+)}

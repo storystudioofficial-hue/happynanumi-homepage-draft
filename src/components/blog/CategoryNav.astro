@@ -1,0 +1,20 @@
+---
+// 분류 바로가기. 글이 있는 분류만 보인다.
+import { CATEGORIES } from '../../data/categories';
+import type { Post } from '../../data/blog';
+interface Props { posts: Post[]; current?: string }
+const { posts, current } = Astro.props;
+const counts = new Map<string, number>();
+for (const p of posts) counts.set(p.data.category, (counts.get(p.data.category) ?? 0) + 1);
+const used = CATEGORIES.filter((c) => counts.has(c.slug));
+---
+{used.length > 1 && (
+  <nav class="cat-nav" aria-label="분류">
+    <a href="/blog/" aria-current={!current ? 'page' : undefined}>전체 <span>{posts.length}</span></a>
+    {used.map((c) => (
+      <a href={`/blog/category/${c.slug}/`} aria-current={current === c.slug ? 'page' : undefined}>
+        {c.label} <span>{counts.get(c.slug)}</span>
+      </a>
+    ))}
+  </nav>
+)}
