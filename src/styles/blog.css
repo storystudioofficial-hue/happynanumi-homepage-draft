@@ -61,14 +61,14 @@ nav.crumbs,nav.more{display:block;gap:0}
 .sources a{color:var(--green);word-break:break-all}
 
 /* 상담 안내 */
-.post-cta{margin:48px 0 0;padding:36px 32px;background:var(--green);color:#F4F6F1;text-align:center}
+.post-cta{margin:48px 0 0;padding:36px 32px;background:var(--green);color:var(--last-ink);text-align:center}
 .post-cta .big{font-family:var(--serif);font-size:1.375rem;line-height:1.55;margin:0 0 20px;font-weight:700}
 .post-cta .cta-row{justify-content:center}
-.post-cta .btn-primary{background:#F4F6F1;color:var(--green);border-color:#F4F6F1}
+.post-cta .btn-primary{background:var(--last-ink);color:var(--green);border-color:var(--last-ink)}
 .post-cta .btn-primary:hover{background:#fff}
-.post-cta .btn-ghost{color:#F4F6F1;border-color:#9DBFAE}
+.post-cta .btn-ghost{color:var(--last-ink);border-color:var(--last-line)}
 .post-cta .btn-ghost:hover{background:var(--green-2)}
-.post-cta .small{color:#D5E5DB;font-size:.9375rem;margin:14px 0 0}
+.post-cta .small{color:var(--last-soft);font-size:.9375rem;margin:14px 0 0}
 
 /* 다른 글 */
 .more{margin:56px 0 96px}
@@ -94,7 +94,7 @@ nav a[aria-current="page"]{color:var(--ink);font-weight:700;border-bottom-color:
 /* ── 블로그 기능 보강 (분류·목차·센터 소개) ── */
 nav.cat-nav,nav.toc{display:block;gap:0}
 .cat-tag{display:inline-block;margin:0 0 6px;padding:2px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-family:var(--sans);font-size:.8125rem;font-weight:700;line-height:1.6;text-decoration:none}
-a.cat-tag:hover{background:#d3e2d7}
+a.cat-tag:hover{background:var(--band)}
 .post-head .kicker{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .post-head .kicker .cat-tag{margin:0}
 .post-head .kicker .draft-tag{margin:0}
@@ -104,7 +104,7 @@ a.cat-tag:hover{background:#d3e2d7}
 .cat-nav a span{font-size:.8125rem;color:var(--muted)}
 .cat-nav a:hover{border-color:var(--green);color:var(--green)}
 .cat-nav a[aria-current="page"]{background:var(--green);border-color:var(--green);color:#fff;font-weight:700}
-.cat-nav a[aria-current="page"] span{color:#D5E5DB}
+.cat-nav a[aria-current="page"] span{color:var(--last-soft)}
 
 .toc{margin:28px 0 0;padding:20px 24px;background:var(--band);border-left:4px solid var(--green)}
 .toc-title{margin:0 0 8px;font-family:var(--serif);font-weight:700;color:var(--heading);font-size:1.0625rem}
@@ -142,3 +142,6 @@ nav.cat-nav{gap:8px}
 .toc li:not(.sub)::before{content:counter(toc) ".";position:absolute;left:0;color:var(--green);font-weight:700}
 .toc li.sub{padding-left:1.6em}
 .toc li.sub::before{content:"– "}
+
+/* 404 페이지(blog-page 클래스 사용): 버튼이 바닥글에 붙지 않게 */
+.blog-page .hero{padding-bottom:96px}
